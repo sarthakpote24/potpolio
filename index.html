@@ -8,37 +8,379 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--accent:#0ea5a4;--bg:#0f172a;--card:#0b1220;--muted:#94a3b8}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071024 0%, #071733 100%);color:#e6eef6}
-    .container{max-width:1100px;margin:40px auto;padding:28px}
-    header{display:flex;gap:20px;align-items:center}
-    .avatar{width:120px;height:120px;border-radius:18px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .avatar svg{width:84px;height:84px;opacity:0.95}
-    h1{margin:0;font-size:28px}
-    .sub{color:var(--muted);margin-top:6px;font-size:14px}
-    .contact{margin-left:auto;text-align:right}
-    a.contact-link{display:block;color:#cfeffd;text-decoration:none;font-weight:600}
-    .grid{display:grid;grid-template-columns:320px 1fr;gap:24px;margin-top:28px}
-    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    .small{font-size:13px;color:var(--muted)}
-    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-    .kpis{display:flex;gap:12px;flex-wrap:wrap}
-    .kpi{flex:1 1 140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px}
-    .kpi .label{font-size:12px;color:var(--muted)}
-    .kpi .value{font-size:18px;font-weight:700;margin-top:6px}
-    .skills{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{background:rgba(255,255,255,0.04);padding:8px 10px;border-radius:999px;font-size:13px}
-    .project-visuals{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    canvas{background:transparent;border-radius:8px}
-    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
-    @media (max-width:840px){.grid{grid-template-columns:1fr;}.contact{text-align:left;margin-left:0}.project-visuals{grid-template-columns:1fr}}
+    :root {
+      --accent: #0ea5a4;
+      --bg: #0f172a;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg, #071024 0%, #071733 100%);
+      color: #e6eef6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 28px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      animation: slideDown 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    
+    @keyframes slideDown {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent), #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(14, 165, 164, 0.5);
+    }
+    
+    .avatar::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+      );
+      transform: rotate(30deg);
+      transition: var(--transition);
+    }
+    
+    .avatar:hover::before {
+      transform: rotate(0);
+    }
+    
+    .avatar svg {
+      width: 84px;
+      height: 84px;
+      opacity: 0.95;
+      transition: var(--transition);
+    }
+    
+    .avatar:hover svg {
+      transform: scale(1.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.5s ease;
+    }
+    
+    h1:hover::after {
+      width: 100%;
+    }
+    
+    .sub {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 14px;
+    }
+    
+    .contact {
+      margin-left: auto;
+      text-align: right;
+    }
+    
+    a.contact-link {
+      display: block;
+      color: #cfeffd;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: var(--transition);
+      padding: 2px 0;
+    }
+    
+    a.contact-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    a.contact-link:hover {
+      color: var(--accent);
+    }
+    
+    a.contact-link:hover::after {
+      width: 100%;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: cardAppear 0.6s ease forwards;
+    }
+    
+    @keyframes cardAppear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(2, 6, 23, 0.8);
+    }
+    
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .kpis {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .kpi {
+      flex: 1 1 140px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 12px;
+      border-radius: 10px;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: kpiAppear 0.5s ease forwards;
+    }
+    
+    @keyframes kpiAppear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .kpi:nth-child(1) { animation-delay: 0.3s; }
+    .kpi:nth-child(2) { animation-delay: 0.4s; }
+    .kpi:nth-child(3) { animation-delay: 0.5s; }
+    .kpi:nth-child(4) { animation-delay: 0.6s; }
+    
+    .kpi:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(180deg, rgba(14, 165, 164, 0.1), rgba(14, 165, 164, 0.05));
+    }
+    
+    .kpi .label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
+    .kpi .value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 6px;
+      transition: var(--transition);
+    }
+    
+    .kpi:hover .value {
+      color: var(--accent);
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .chip {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      transition: var(--transition);
+      cursor: pointer;
+      display: inline-block;
+    }
+    
+    .chip:hover {
+      background: rgba(14, 165, 164, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .project-visuals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    
+    canvas {
+      background: transparent;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    
+    .chart-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .chart-container:hover canvas {
+      transform: scale(1.02);
+    }
+    
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+    
+    @media (max-width: 840px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact {
+        text-align: left;
+        margin-left: 0;
+      }
+      
+      .project-visuals {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Floating animation for subtle movement */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Pulse animation for attention */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(14, 165, 164, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(14, 165, 164, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(14, 165, 164, 0); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Typewriter effect for text */
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid var(--accent);
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--accent) }
+    }
+    
+    /* Scroll animations */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="avatar" aria-hidden>
+      <div class="avatar floating" aria-hidden>
         <!-- Simple initials avatar -->
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
           <rect width="100" height="100" rx="18" fill="rgba(255,255,255,0.05)"/>
@@ -62,7 +404,7 @@
     <div class="grid">
       <!-- Left column -->
       <aside>
-        <div class="card">
+        <div class="card scroll-animate">
           <div class="section-title"><strong>Education</strong></div>
           <div style="margin-bottom:10px">
             <div style="font-weight:700">Bachelor of Computer Science</div>
@@ -90,18 +432,18 @@
 
         </div>
 
-        <div class="card" style="margin-top:14px">
+        <div class="card scroll-animate" style="margin-top:14px">
           <div class="section-title"><strong>Languages</strong></div>
           <div class="small">English • Hindi • Marathi</div>
 
           <div style="margin-top:12px" class="section-title"><strong>Download CV</strong></div>
-          <a href="mailto:sarthakpote24@gmail.com?subject=Request%20for%20Resume" class="chip">Request CV by Email</a>
+          <a href="mailto:sarthakpote24@gmail.com?subject=Request%20for%20Resume" class="chip pulse">Request CV by Email</a>
         </div>
       </aside>
 
       <!-- Right column -->
       <main>
-        <div class="card">
+        <div class="card scroll-animate">
           <div class="section-title"><strong>Summary</strong></div>
           <p class="small">Data-focused B.Sc. Computer Science graduate with strong foundations in SQL and Python. Completed a capstone/portfolio project analysing Blinkit sales data with Power BI — delivered KPI dashboards, charts and recommendations to optimize sales and inventory distribution.</p>
 
@@ -126,22 +468,22 @@
 
           <div style="margin-top:12px" class="section-title"><strong>Charts & Visuals (Preview)</strong></div>
           <div class="project-visuals">
-            <div class="card" style="padding:12px">
+            <div class="card chart-container" style="padding:12px">
               <div class="small" style="margin-bottom:8px">Sales by Item Type</div>
               <canvas id="chart-sales-type" width="400" height="260"></canvas>
             </div>
 
-            <div class="card" style="padding:12px">
+            <div class="card chart-container" style="padding:12px">
               <div class="small" style="margin-bottom:8px">Sales by Outlet Size (Percentage)</div>
               <canvas id="chart-outlet-size" width="400" height="260"></canvas>
             </div>
 
-            <div class="card" style="padding:12px">
+            <div class="card chart-container" style="padding:12px">
               <div class="small" style="margin-bottom:8px">Fat Content vs Total Sales (by Outlet)</div>
               <canvas id="chart-fat-outlet" width="400" height="240"></canvas>
             </div>
 
-            <div class="card" style="padding:12px">
+            <div class="card chart-container" style="padding:12px">
               <div class="small" style="margin-bottom:8px">All Metrics by Outlet Type (small preview)</div>
               <canvas id="chart-multi" width="400" height="240"></canvas>
             </div>
@@ -158,10 +500,10 @@
           <p class="small">If you'd like, I can export this as a downloadable HTML file, generate a PDF resume, or adapt the layout for hosting (Netlify / GitHub Pages). Tell me which you'd prefer.</p>
         </div>
 
-        <div class="card" style="margin-top:14px">
+        <div class="card scroll-animate" style="margin-top:14px">
           <div class="section-title"><strong>Portfolio</strong></div>
           <div class="small">Blinkit Analysis — Power BI dashboard (KPIs, Item-type analysis, Outlet segmentation, Fat-content correlation). Completed recently and included in portfolio.</div>
-          <div style="margin-top:10px"><a class="chip" href="mailto:sarthakpote24@gmail.com?subject=Portfolio%20Request">Request project files</a></div>
+          <div style="margin-top:10px"><a class="chip pulse" href="mailto:sarthakpote24@gmail.com?subject=Portfolio%20Request">Request project files</a></div>
         </div>
 
       </main>
@@ -176,6 +518,35 @@
     // set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Scroll animation observer
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return (
+        elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+      );
+    };
+    
+    const displayScrollElement = (element) => {
+      element.classList.add('visible');
+    };
+    
+    const handleScrollAnimation = () => {
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.2)) {
+          displayScrollElement(el);
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', () => {
+      handleScrollAnimation();
+    });
+    
+    // Initialize scroll animation on page load
+    handleScrollAnimation();
+
     // -- SAMPLE DATA -- replace the arrays below with real numbers from your analysis or Power BI exports.
     const sampleKPIs = {
       totalSales: 1254300, // currency in rupees
@@ -184,12 +555,31 @@
       avgRating: 4.12
     };
 
-    // Render KPI values
+    // Animated KPI counter
+    function animateCounter(element, start, end, duration, prefix = '', suffix = '') {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = prefix + value.toLocaleString('en-IN') + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    // Render KPI values with animation
     function formatINR(x){ return '₹ ' + x.toLocaleString('en-IN'); }
-    document.getElementById('kpi-total').textContent = formatINR(sampleKPIs.totalSales);
-    document.getElementById('kpi-avg').textContent = formatINR(Math.round(sampleKPIs.avgSales*100)/100);
-    document.getElementById('kpi-items').textContent = sampleKPIs.itemCount;
-    document.getElementById('kpi-rating').textContent = (Math.round(sampleKPIs.avgRating*100)/100) + ' ★';
+    
+    // Animate KPI counters after a short delay
+    setTimeout(() => {
+      animateCounter(document.getElementById('kpi-total'), 0, sampleKPIs.totalSales, 1500, '₹ ');
+      animateCounter(document.getElementById('kpi-avg'), 0, Math.round(sampleKPIs.avgSales*100)/100, 1500, '₹ ');
+      animateCounter(document.getElementById('kpi-items'), 0, sampleKPIs.itemCount, 1500);
+      animateCounter(document.getElementById('kpi-rating'), 0, Math.round(sampleKPIs.avgRating*100)/100, 1500, '', ' ★');
+    }, 500);
 
     // Sample chart data (replace with your cleaned data)
     const salesByType = {
@@ -216,21 +606,42 @@
     new Chart(document.getElementById('chart-sales-type'), {
       type: 'bar',
       data: { labels: salesByType.labels, datasets: [{ label: 'Sales', data: salesByType.values }]},
-      options: { responsive: true, plugins:{legend:{display:false}} }
+      options: { 
+        responsive: true, 
+        plugins:{legend:{display:false}},
+        animation: {
+          duration: 2000,
+          easing: 'easeOutQuart'
+        }
+      }
     });
 
     // Outlet size % (doughnut)
     new Chart(document.getElementById('chart-outlet-size'), {
       type: 'doughnut',
       data: { labels: outletSizePercent.labels, datasets: [{ data: outletSizePercent.values }]},
-      options: { responsive: true }
+      options: { 
+        responsive: true,
+        animation: {
+          duration: 2000,
+          easing: 'easeOutQuart'
+        }
+      }
     });
 
     // Fat content vs outlet (stacked bar)
     new Chart(document.getElementById('chart-fat-outlet'), {
       type: 'bar',
       data: { labels: fatSalesByOutlet.labels, datasets: fatSalesByOutlet.datasets },
-      options: { responsive:true, plugins:{legend:{position:'bottom'}}, scales:{x:{stacked:false}, y:{beginAtZero:true}} }
+      options: { 
+        responsive:true, 
+        plugins:{legend:{position:'bottom'}}, 
+        scales:{x:{stacked:false}, y:{beginAtZero:true}},
+        animation: {
+          duration: 2000,
+          easing: 'easeOutQuart'
+        }
+      }
     });
 
     // Multi-metric small preview (line + bar mix)
@@ -243,7 +654,15 @@
           { type:'line', label:'Avg Rating', data:[4.2,3.9,4.1,3.8], yAxisID:'y1', tension:0.4 }
         ]
       },
-      options:{ responsive:true, scales:{ y:{position:'left'}, y1:{position:'right', min:0, max:5, grid:{display:false}} }, plugins:{legend:{position:'bottom'}} }
+      options:{ 
+        responsive:true, 
+        scales:{ y:{position:'left'}, y1:{position:'right', min:0, max:5, grid:{display:false}} }, 
+        plugins:{legend:{position:'bottom'}},
+        animation: {
+          duration: 2000,
+          easing: 'easeOutQuart'
+        }
+      }
     });
   </script>
 </body>
