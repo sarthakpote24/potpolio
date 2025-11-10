@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sarthak Pote — Portfolio & Resume</title>
+  <meta name="description" content="Portfolio and interactive resume for Sarthak Pote — BSc Computer Science | Data & BI Project: Blinkit Analysis" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{
+      --accent:#0ea5a4;
+      --bg:#0f172a;
+      --muted:#94a3b8;
+    }
+    *{box-sizing:border-box;scroll-behavior:smooth;}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:linear-gradient(180deg,#071024 0%, #071733 100%);
+      color:#e6eef6;
+    }
+    header,section,footer{animation:fadeIn 1s ease both;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+    .container{max-width:1100px;margin:40px auto;padding:28px;}
+    header{display:flex;gap:20px;align-items:center;}
+    .avatar{
+      width:120px;height:120px;border-radius:18px;
+      background:linear-gradient(135deg,var(--accent),#60a5fa);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 25px rgba(14,165,164,0.4);
+      transition:transform .3s ease;
+    }
+    .avatar:hover{transform:scale(1.05);}
+    .avatar svg{width:84px;height:84px;opacity:0.95;}
+    h1{margin:0;font-size:28px;}
+    .sub{color:var(--muted);margin-top:6px;font-size:14px;}
+    .contact{margin-left:auto;text-align:right;}
+    a.contact-link{
+      display:block;color:#cfeffd;text-decoration:none;font-weight:600;transition:color .3s;
+    }
+    a.contact-link:hover{color:var(--accent);}
+    .grid{
+      display:grid;grid-template-columns:320px 1fr;gap:24px;margin-top:28px;
+    }
+    .card{
+      background:rgba(255,255,255,0.03);
+      padding:18px;border-radius:12px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6);
+      transition:transform .3s ease,box-shadow .3s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(14,165,164,0.4);}
+    .small{font-size:13px;color:var(--muted);}
+    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .section-title strong{font-size:16px;}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;}
+    .chip{
+      background:rgba(255,255,255,0.04);padding:8px 10px;
+      border-radius:999px;font-size:13px;transition:background .3s;
+    }
+    .chip:hover{background:var(--accent);color:#fff;}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap;}
+    .kpi{
+      flex:1 1 140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:12px;border-radius:10px;transition:transform .3s;
+    }
+    .kpi:hover{transform:translateY(-6px);}
+    .kpi .label{font-size:12px;color:var(--muted);}
+    .kpi .value{font-size:18px;font-weight:700;margin-top:6px;color:var(--accent);}
+    .project-visuals{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px;}
+    @media (max-width:840px){
+      .grid{grid-template-columns:1fr;}
+      .contact{text-align:left;margin-left:0;}
+      .project-visuals{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="18" fill="rgba(255,255,255,0.05)"/>
+          <text x="50" y="58" text-anchor="middle" font-size="42" font-weight="700" fill="#022127" font-family="Inter, Arial">SP</text>
+        </svg>
+      </div>
+      <div>
+        <h1>Sarthak Pote</h1>
+        <div class="sub">B.Sc. Computer Science (Passed 2024) — Fresh Graduate | Data Analysis & Power BI</div>
+        <div class="small" style="margin-top:8px">Languages: English • Hindi • Marathi</div>
+      </div>
+      <div class="contact">
+        <a class="contact-link" href="mailto:sarthakpote24@gmail.com">sarthakpote24@gmail.com</a>
+        <a class="contact-link" href="tel:+918149679370">+91 81496 79370</a>
+        <div class="small" style="margin-top:8px">Location: Nashik, India</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside>
+        <div class="card">
+          <div class="section-title"><strong>Education</strong></div>
+          <div><strong>Bachelor of Computer Science</strong><br>
+          <span class="small">G.D. Sawant College, Nashik — Savitribai Phule Pune University</span><br>
+          <span class="small">Pass out: 2024 • SGPA: 8.39</span></div>
+          <br>
+          <div><strong>High School (12th Science)</strong><br>
+          <span class="small">KSKW College, Nashik — Savitribai Phule Pune University</span><br>
+          <span class="small">Pass out: 2023 • Percentage: 53.67%</span></div>
+          <div class="section-title" style="margin-top:8px"><strong>Skills</strong></div>
+          <div class="skills">
+            <div class="chip">SQL / MySQL</div>
+            <div class="chip">Python (Jupyter)</div>
+            <div class="chip">Power BI</div>
+            <div class="chip">Data Visualization</div>
+            <div class="chip">Data Cleaning</div>
+          </div>
+          <div class="section-title" style="margin-top:14px"><strong>Experience</strong></div>
+          <div class="small">Fresher — seeking opportunities in data analysis, BI, or entry-level software roles.</div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <div class="section-title"><strong>Languages</strong></div>
+          <div class="small">English • Hindi • Marathi</div>
+          <div style="margin-top:12px" class="section-title"><strong>Download CV</strong></div>
+          <a href="mailto:sarthakpote24@gmail.com?subject=Request%20for%20Resume" class="chip">Request CV by Email</a>
+        </div>
+      </aside>
+
+      <main>
+        <section class="card" id="project">
+          <div class="section-title"><strong>Recent Project — Blinkit Analysis</strong></div>
+          <p class="small">Interactive Power BI analysis exploring Blinkit’s sales performance, customer satisfaction, and inventory distribution using dynamic KPIs and dashboards.</p>
+          
+          <div class="kpis">
+            <div class="kpi"><div class="label">Total Sales</div><div class="value" id="kpi-total">₹ --</div></div>
+            <div class="kpi"><div class="label">Average Sales</div><div class="value" id="kpi-avg">₹ --</div></div>
+            <div class="kpi"><div class="label">Number of Items</div><div class="value" id="kpi-items">--</div></div>
+            <div class="kpi"><div class="label">Average Rating</div><div class="value" id="kpi-rating">-- ★</div></div>
+          </div>
+
+          <div class="section-title"><strong>Charts Preview</strong></div>
+          <div class="project-visuals">
+            <canvas id="chart1"></canvas>
+            <canvas id="chart2"></canvas>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>© <span id="year"></span> Sarthak Pote • Interactive Portfolio</footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const sampleKPIs = { totalSales: 1254300, avgSales: 235.6, itemCount: 428, avgRating: 4.12 };
+    const formatINR = x => '₹ ' + x.toLocaleString('en-IN');
+    document.getElementById('kpi-total').textContent = formatINR(sampleKPIs.totalSales);
+    document.getElementById('kpi-avg').textContent = formatINR(Math.round(sampleKPIs.avgSales*100)/100);
+    document.getElementById('kpi-items').textContent = sampleKPIs.itemCount;
+    document.getElementById('kpi-rating').textContent = (Math.round(sampleKPIs.avgRating*100)/100)+' ★';
+
+    new Chart(document.getElementById('chart1'), {
+      type:'bar',
+      data:{
+        labels:['Grocery','Dairy','Snacks','Beverages'],
+        datasets:[{ 
+          label:'Sales',
+          data:[420,310,180,160],
+          backgroundColor:['#0ea5a4','#22d3ee','#38bdf8','#60a5fa']
+        }]
+      },
+      options:{
+        responsive:true,
+        plugins:{legend:{display:false}},
+        animation:{duration:1200}
+      }
+    });
+
+    new Chart(document.getElementById('chart2'), {
+      type:'doughnut',
+      data:{
+        labels:['Small','Medium','Large'],
+        datasets:[{
+          data:[28,47,25],
+          backgroundColor:['#0ea5a4','#38bdf8','#94a3b8']
+        }]
+      },
+      options:{
+        responsive:true,
+        animation:{animateScale:true,duration:1500}
+      }
+    });
+  </script>
+</body>
+</html>
