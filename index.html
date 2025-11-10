@@ -4,94 +4,54 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sarthak Pote — Portfolio & Resume</title>
-  <meta name="description" content="Portfolio and interactive resume for Sarthak Pote — BSc Computer Science | Data & BI Project: Blinkit Analysis" />
+  <meta name="description" content="Portfolio and single-page resume for Sarthak Pote — BSc Computer Science | Data & BI Project: Blinkit Analysis" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root{
-      --accent:#0ea5a4;
-      --bg:#0f172a;
-      --muted:#94a3b8;
-    }
-    *{box-sizing:border-box;scroll-behavior:smooth;}
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
-      background:linear-gradient(180deg,#071024 0%, #071733 100%);
-      color:#e6eef6;
-    }
-    header,section,footer{animation:fadeIn 1s ease both;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
-    .container{max-width:1100px;margin:40px auto;padding:28px;}
-    header{display:flex;gap:20px;align-items:center;}
-    .avatar{
-      width:120px;height:120px;border-radius:18px;
-      background:linear-gradient(135deg,var(--accent),#60a5fa);
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 0 25px rgba(14,165,164,0.4);
-      transition:transform .3s ease;
-    }
-    .avatar:hover{transform:scale(1.05);}
-    .avatar svg{width:84px;height:84px;opacity:0.95;}
-    h1{margin:0;font-size:28px;}
-    .sub{color:var(--muted);margin-top:6px;font-size:14px;}
-    .contact{margin-left:auto;text-align:right;}
-    a.contact-link{
-      display:block;color:#cfeffd;text-decoration:none;font-weight:600;transition:color .3s;
-    }
-    a.contact-link:hover{color:var(--accent);}
-    .grid{
-      display:grid;grid-template-columns:320px 1fr;gap:24px;margin-top:28px;
-    }
-    .card{
-      background:rgba(255,255,255,0.03);
-      padding:18px;border-radius:12px;
-      box-shadow:0 6px 18px rgba(2,6,23,0.6);
-      transition:transform .3s ease,box-shadow .3s ease;
-    }
-    .card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(14,165,164,0.4);}
-    .small{font-size:13px;color:var(--muted);}
-    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-    .section-title strong{font-size:16px;}
-    .skills{display:flex;flex-wrap:wrap;gap:8px;}
-    .chip{
-      background:rgba(255,255,255,0.04);padding:8px 10px;
-      border-radius:999px;font-size:13px;transition:background .3s;
-    }
-    .chip:hover{background:var(--accent);color:#fff;}
-    .kpis{display:flex;gap:12px;flex-wrap:wrap;}
-    .kpi{
-      flex:1 1 140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:12px;border-radius:10px;transition:transform .3s;
-    }
-    .kpi:hover{transform:translateY(-6px);}
-    .kpi .label{font-size:12px;color:var(--muted);}
-    .kpi .value{font-size:18px;font-weight:700;margin-top:6px;color:var(--accent);}
-    .project-visuals{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px;}
-    @media (max-width:840px){
-      .grid{grid-template-columns:1fr;}
-      .contact{text-align:left;margin-left:0;}
-      .project-visuals{grid-template-columns:1fr;}
-    }
+    :root{--accent:#0ea5a4;--bg:#0f172a;--card:#0b1220;--muted:#94a3b8}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071024 0%, #071733 100%);color:#e6eef6}
+    .container{max-width:1100px;margin:40px auto;padding:28px}
+    header{display:flex;gap:20px;align-items:center}
+    .avatar{width:120px;height:120px;border-radius:18px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .avatar svg{width:84px;height:84px;opacity:0.95}
+    h1{margin:0;font-size:28px}
+    .sub{color:var(--muted);margin-top:6px;font-size:14px}
+    .contact{margin-left:auto;text-align:right}
+    a.contact-link{display:block;color:#cfeffd;text-decoration:none;font-weight:600}
+    .grid{display:grid;grid-template-columns:320px 1fr;gap:24px;margin-top:28px}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .small{font-size:13px;color:var(--muted)}
+    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap}
+    .kpi{flex:1 1 140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+    .kpi .value{font-size:18px;font-weight:700;margin-top:6px}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:rgba(255,255,255,0.04);padding:8px 10px;border-radius:999px;font-size:13px}
+    .project-visuals{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    canvas{background:transparent;border-radius:8px}
+    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+    @media (max-width:840px){.grid{grid-template-columns:1fr;}.contact{text-align:left;margin-left:0}.project-visuals{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="avatar">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <div class="avatar" aria-hidden>
+        <!-- Simple initials avatar -->
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
           <rect width="100" height="100" rx="18" fill="rgba(255,255,255,0.05)"/>
           <text x="50" y="58" text-anchor="middle" font-size="42" font-weight="700" fill="#022127" font-family="Inter, Arial">SP</text>
         </svg>
       </div>
+
       <div>
         <h1>Sarthak Pote</h1>
         <div class="sub">B.Sc. Computer Science (Passed 2024) — Fresh Graduate | Data Analysis & Power BI</div>
         <div class="small" style="margin-top:8px">Languages: English • Hindi • Marathi</div>
       </div>
+
       <div class="contact">
         <a class="contact-link" href="mailto:sarthakpote24@gmail.com">sarthakpote24@gmail.com</a>
         <a class="contact-link" href="tel:+918149679370">+91 81496 79370</a>
@@ -100,16 +60,22 @@
     </header>
 
     <div class="grid">
+      <!-- Left column -->
       <aside>
         <div class="card">
           <div class="section-title"><strong>Education</strong></div>
-          <div><strong>Bachelor of Computer Science</strong><br>
-          <span class="small">G.D. Sawant College, Nashik — Savitribai Phule Pune University</span><br>
-          <span class="small">Pass out: 2024 • SGPA: 8.39</span></div>
-          <br>
-          <div><strong>High School (12th Science)</strong><br>
-          <span class="small">KSKW College, Nashik — Savitribai Phule Pune University</span><br>
-          <span class="small">Pass out: 2023 • Percentage: 53.67%</span></div>
+          <div style="margin-bottom:10px">
+            <div style="font-weight:700">Bachelor of Computer Science</div>
+            <div class="small">G.D. Sawant College, Nashik — Savitribai Phule Pune University</div>
+            <div class="small">Pass out: 2024 • SGPA: 8.39</div>
+          </div>
+
+          <div style="margin-bottom:10px">
+            <div style="font-weight:700">High School (12th Science)</div>
+            <div class="small">KSKW College, Nashik — Savitribai Phule Pune University</div>
+            <div class="small">Pass out: 2023 • Percentage: 53.67%</div>
+          </div>
+
           <div class="section-title" style="margin-top:8px"><strong>Skills</strong></div>
           <div class="skills">
             <div class="chip">SQL / MySQL</div>
@@ -118,81 +84,166 @@
             <div class="chip">Data Visualization</div>
             <div class="chip">Data Cleaning</div>
           </div>
+
           <div class="section-title" style="margin-top:14px"><strong>Experience</strong></div>
           <div class="small">Fresher — seeking opportunities in data analysis, BI, or entry-level software roles.</div>
+
         </div>
 
         <div class="card" style="margin-top:14px">
           <div class="section-title"><strong>Languages</strong></div>
           <div class="small">English • Hindi • Marathi</div>
+
           <div style="margin-top:12px" class="section-title"><strong>Download CV</strong></div>
           <a href="mailto:sarthakpote24@gmail.com?subject=Request%20for%20Resume" class="chip">Request CV by Email</a>
         </div>
       </aside>
 
+      <!-- Right column -->
       <main>
-        <section class="card" id="project">
-          <div class="section-title"><strong>Recent Project — Blinkit Analysis</strong></div>
-          <p class="small">Interactive Power BI analysis exploring Blinkit’s sales performance, customer satisfaction, and inventory distribution using dynamic KPIs and dashboards.</p>
-          
-          <div class="kpis">
+        <div class="card">
+          <div class="section-title"><strong>Summary</strong></div>
+          <p class="small">Data-focused B.Sc. Computer Science graduate with strong foundations in SQL and Python. Completed a capstone/portfolio project analysing Blinkit sales data with Power BI — delivered KPI dashboards, charts and recommendations to optimize sales and inventory distribution.</p>
+
+          <div style="margin-top:12px" class="section-title"><strong>Recent Project — Blinkit Analysis</strong></div>
+          <p class="small">Business goal: Conduct a comprehensive analysis of Blinkit's sales performance, customer satisfaction, and inventory distribution to surface actionable insights and optimization opportunities. Tools used: Power BI, SQL, Python (Jupyter), data-cleaning & visualization best practices.</p>
+
+          <div style="margin-top:12px" class="section-title"><strong>Project KPIs</strong></div>
+          <div class="kpis" style="margin-bottom:12px">
             <div class="kpi"><div class="label">Total Sales</div><div class="value" id="kpi-total">₹ --</div></div>
             <div class="kpi"><div class="label">Average Sales</div><div class="value" id="kpi-avg">₹ --</div></div>
             <div class="kpi"><div class="label">Number of Items</div><div class="value" id="kpi-items">--</div></div>
             <div class="kpi"><div class="label">Average Rating</div><div class="value" id="kpi-rating">-- ★</div></div>
           </div>
 
-          <div class="section-title"><strong>Charts Preview</strong></div>
+          <div class="section-title"><strong>Granular Analysis</strong></div>
+          <ul class="small">
+            <li>Total Sales by Fat Content — compared sales across fat categories and examined related KPIs.</li>
+            <li>Total Sales by Item Type — identified top-performing item types and underperformers.</li>
+            <li>Fat Content by Outlet for Total Sales — compared performance across outlets segmented by fat content.</li>
+            <li>Total Sales by Outlet Establishment — evaluated impact of outlet age/type on sales.</li>
+          </ul>
+
+          <div style="margin-top:12px" class="section-title"><strong>Charts & Visuals (Preview)</strong></div>
           <div class="project-visuals">
-            <canvas id="chart1"></canvas>
-            <canvas id="chart2"></canvas>
+            <div class="card" style="padding:12px">
+              <div class="small" style="margin-bottom:8px">Sales by Item Type</div>
+              <canvas id="chart-sales-type" width="400" height="260"></canvas>
+            </div>
+
+            <div class="card" style="padding:12px">
+              <div class="small" style="margin-bottom:8px">Sales by Outlet Size (Percentage)</div>
+              <canvas id="chart-outlet-size" width="400" height="260"></canvas>
+            </div>
+
+            <div class="card" style="padding:12px">
+              <div class="small" style="margin-bottom:8px">Fat Content vs Total Sales (by Outlet)</div>
+              <canvas id="chart-fat-outlet" width="400" height="240"></canvas>
+            </div>
+
+            <div class="card" style="padding:12px">
+              <div class="small" style="margin-bottom:8px">All Metrics by Outlet Type (small preview)</div>
+              <canvas id="chart-multi" width="400" height="240"></canvas>
+            </div>
           </div>
-        </section>
+
+          <div style="margin-top:12px" class="section-title"><strong>Project Notes & How to Replace Data</strong></div>
+          <ol class="small">
+            <li>Data source: replace the sample arrays in the embedded script with your cleaned CSV/JSON or Power BI export values.</li>
+            <li>Charts use Chart.js (CDN). Replace sample values with real KPIs to show the final dashboards.</li>
+            <li>This page is static — for interactive Power BI dashboards embed the published report or link to the .pbix file.</li>
+          </ol>
+
+          <div style="margin-top:14px" class="section-title"><strong>Call to Action</strong></div>
+          <p class="small">If you'd like, I can export this as a downloadable HTML file, generate a PDF resume, or adapt the layout for hosting (Netlify / GitHub Pages). Tell me which you'd prefer.</p>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <div class="section-title"><strong>Portfolio</strong></div>
+          <div class="small">Blinkit Analysis — Power BI dashboard (KPIs, Item-type analysis, Outlet segmentation, Fat-content correlation). Completed recently and included in portfolio.</div>
+          <div style="margin-top:10px"><a class="chip" href="mailto:sarthakpote24@gmail.com?subject=Portfolio%20Request">Request project files</a></div>
+        </div>
+
       </main>
     </div>
 
-    <footer>© <span id="year"></span> Sarthak Pote • Interactive Portfolio</footer>
+    <footer>© <span id="year"></span> Sarthak Pote • Built with HTML, CSS & Chart.js</footer>
   </div>
 
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    // set current year
     document.getElementById('year').textContent = new Date().getFullYear();
-    const sampleKPIs = { totalSales: 1254300, avgSales: 235.6, itemCount: 428, avgRating: 4.12 };
-    const formatINR = x => '₹ ' + x.toLocaleString('en-IN');
+
+    // -- SAMPLE DATA -- replace the arrays below with real numbers from your analysis or Power BI exports.
+    const sampleKPIs = {
+      totalSales: 1254300, // currency in rupees
+      avgSales: 235.6,
+      itemCount: 428,
+      avgRating: 4.12
+    };
+
+    // Render KPI values
+    function formatINR(x){ return '₹ ' + x.toLocaleString('en-IN'); }
     document.getElementById('kpi-total').textContent = formatINR(sampleKPIs.totalSales);
     document.getElementById('kpi-avg').textContent = formatINR(Math.round(sampleKPIs.avgSales*100)/100);
     document.getElementById('kpi-items').textContent = sampleKPIs.itemCount;
-    document.getElementById('kpi-rating').textContent = (Math.round(sampleKPIs.avgRating*100)/100)+' ★';
+    document.getElementById('kpi-rating').textContent = (Math.round(sampleKPIs.avgRating*100)/100) + ' ★';
 
-    new Chart(document.getElementById('chart1'), {
-      type:'bar',
-      data:{
-        labels:['Grocery','Dairy','Snacks','Beverages'],
-        datasets:[{ 
-          label:'Sales',
-          data:[420,310,180,160],
-          backgroundColor:['#0ea5a4','#22d3ee','#38bdf8','#60a5fa']
-        }]
-      },
-      options:{
-        responsive:true,
-        plugins:{legend:{display:false}},
-        animation:{duration:1200}
-      }
+    // Sample chart data (replace with your cleaned data)
+    const salesByType = {
+      labels: ['Grocery','Dairy','Snacks','Beverages','Bakery','Frozen'],
+      values: [420000, 310000, 180000, 160000, 95000, 18500]
+    };
+
+    const outletSizePercent = {
+      labels: ['Small','Medium','Large'],
+      values: [28, 47, 25]
+    };
+
+    const fatContentLabels = ['Low Fat','Regular','High Fat'];
+    const fatSalesByOutlet = {
+      labels: ['Outlet A','Outlet B','Outlet C','Outlet D'],
+      datasets: fatContentLabels.map((label, i) => ({
+        label: label,
+        data: [Math.random()*100000, Math.random()*100000, Math.random()*100000, Math.random()*100000].map(v=>Math.round(v)),
+        tension: 0.3
+      }))
+    };
+
+    // Sales by item type (bar)
+    new Chart(document.getElementById('chart-sales-type'), {
+      type: 'bar',
+      data: { labels: salesByType.labels, datasets: [{ label: 'Sales', data: salesByType.values }]},
+      options: { responsive: true, plugins:{legend:{display:false}} }
     });
 
-    new Chart(document.getElementById('chart2'), {
-      type:'doughnut',
-      data:{
-        labels:['Small','Medium','Large'],
-        datasets:[{
-          data:[28,47,25],
-          backgroundColor:['#0ea5a4','#38bdf8','#94a3b8']
-        }]
+    // Outlet size % (doughnut)
+    new Chart(document.getElementById('chart-outlet-size'), {
+      type: 'doughnut',
+      data: { labels: outletSizePercent.labels, datasets: [{ data: outletSizePercent.values }]},
+      options: { responsive: true }
+    });
+
+    // Fat content vs outlet (stacked bar)
+    new Chart(document.getElementById('chart-fat-outlet'), {
+      type: 'bar',
+      data: { labels: fatSalesByOutlet.labels, datasets: fatSalesByOutlet.datasets },
+      options: { responsive:true, plugins:{legend:{position:'bottom'}}, scales:{x:{stacked:false}, y:{beginAtZero:true}} }
+    });
+
+    // Multi-metric small preview (line + bar mix)
+    new Chart(document.getElementById('chart-multi'), {
+      type: 'bar',
+      data: {
+        labels: ['Outlet A','Outlet B','Outlet C','Outlet D'],
+        datasets: [
+          { type:'bar', label:'Total Sales', data:[520000,325000,210000,120000], yAxisID:'y' },
+          { type:'line', label:'Avg Rating', data:[4.2,3.9,4.1,3.8], yAxisID:'y1', tension:0.4 }
+        ]
       },
-      options:{
-        responsive:true,
-        animation:{animateScale:true,duration:1500}
-      }
+      options:{ responsive:true, scales:{ y:{position:'left'}, y1:{position:'right', min:0, max:5, grid:{display:false}} }, plugins:{legend:{position:'bottom'}} }
     });
   </script>
 </body>
